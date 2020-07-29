@@ -1,0 +1,14 @@
+.signup-wrapper {
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  display: flex;
+  padding: 100px;
+  .login-form {
+    width: 500px;
+    padding: 20px;
+    .login-form-button {
+      display: block;
+    }
+  }
+}
