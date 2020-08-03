@@ -6,6 +6,7 @@ import BaseLayout from "../components/BaseLayout/BaseLayout";
 import { onSuccessMessage, onErrorMessage } from "../components/BaseLayout/AuthForm";
 import UserCard from "../components/UserComponent/UserCard";
 import RepoList from "../components/UserComponent/RepoList";
+import { SearchOutlined } from "@ant-design/icons/lib/icons";
 const { Search } = Input;
 
 interface IState {
@@ -34,7 +35,13 @@ const Main: FC = () => {
     <BaseLayout>
       <div className='github-page'>
         <div className='search-wrapper'>
-          <Search placeholder='type your github username' size='large' onSearch={fetchUser} enterButton='Search' />
+          <Search
+            placeholder='type your github username'
+            prefix={<SearchOutlined />}
+            size='large'
+            onSearch={fetchUser}
+            enterButton='Search'
+          />
         </div>
         <div className='user-wrapper'>
           {loading ? (

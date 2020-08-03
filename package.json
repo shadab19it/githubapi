@@ -28,10 +28,13 @@
     "typescript": "~3.7.2",
     "universal-cookie": "^4.0.3"
   },
+  "homepage": "http://shadab19it.github.io/githubapi",
   "scripts": {
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
