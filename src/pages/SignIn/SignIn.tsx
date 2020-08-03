@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import React, { FC, useState, useContext } from "react";
-import { Form, Input, Button, Checkbox } from "antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import "./SignIn.scss";
 import { Store } from "antd/lib/form/interface";
 import { userContext } from "../../Context/Context";
@@ -12,22 +10,23 @@ import firebase from "firebase/app";
 import AuthForm, { onErrorMessage, onSuccessMessage } from "../../components/BaseLayout/AuthForm";
 
 const SignIn: FC = () => {
-  const user = isAuthenticate();
+  const context = useContext(userContext);
   const onSignin = (values: Store) => {
     const { username, password } = values;
     firebase
       .auth()
       .signInWithEmailAndPassword(username, password)
       .then((res) => {
+        context.setUser({ email: username, uid: res.user?.uid });
         setUsetInCocke({ email: username, uid: res.user?.uid });
-        onSuccessMessage();
+        onSuccessMessage("You have successfull SignIn");
       })
       .catch((e) => {
         onErrorMessage(e.message);
       });
   };
 
-  if (isAuthenticate()) {
+  if (context.user?.uid) {
     return <Redirect to='/' />;
   }
 

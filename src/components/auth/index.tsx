@@ -1,7 +1,9 @@
 /* eslint-disable no-restricted-globals */
-import React, { useEffect } from "react";
+import React, { useContext } from "react";
 import Cookies from "universal-cookie";
 import { Redirect } from "react-router-dom";
+import { onSuccessMessage } from "../BaseLayout/AuthForm";
+import { userContext } from "../../Context/Context";
 const cookies = new Cookies();
 
 interface User {
@@ -15,7 +17,6 @@ const setCookie = (c: Cookies, name: string, value: any) => {
 
 export const setUsetInCocke = (user: User) => {
   setCookie(cookies, "user", JSON.stringify(user));
-  location.reload();
 };
 
 export const isAuthenticate = () => {
@@ -30,5 +31,5 @@ export const isAuthenticate = () => {
 
 export const isSignOut = () => {
   cookies.remove("user");
-  location.reload();
+  onSuccessMessage("You have successfull logout");
 };

@@ -15,11 +15,16 @@ import { isAuthenticate } from "../components/auth";
 firebase.initializeApp(firebaseConfig);
 
 const Routes = () => {
-  const [user, setUser] = useState(isAuthenticate());
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  if (user === null) {
+    setUser(isAuthenticate());
+  }
 
   return (
     <Router>
-      <userContext.Provider value={{ user, setUser }}>
+      <userContext.Provider value={{ user, setUser, loading, setLoading }}>
         <Switch>
           <Route exact path='/signup' component={SignUp} />
           <Route exact path='/signin' component={SignIn} />

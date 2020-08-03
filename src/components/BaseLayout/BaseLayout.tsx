@@ -11,6 +11,14 @@ const BaseLayout: FC<{ children: React.ReactNode; selectMenu?: string }> = ({ ch
   const context = useContext(userContext);
   const { user, setUser } = context;
   let username = user ? user.email.split("@") : "";
+
+  if (context.user === null) {
+    return <Redirect to='/signin' />;
+  }
+  const onSignOut = () => {
+    isSignOut();
+    context.setUser(null);
+  };
   return (
     <div className='main-wrapper'>
       <Layout className='layout'>
@@ -26,7 +34,7 @@ const BaseLayout: FC<{ children: React.ReactNode; selectMenu?: string }> = ({ ch
               <Menu.Item key='1'>
                 <Link to='/'>Home</Link>
               </Menu.Item>
-              <Menu.Item key='4' onClick={isSignOut}>
+              <Menu.Item key='4' onClick={onSignOut}>
                 SignOut
               </Menu.Item>
             </Menu>
@@ -42,7 +50,7 @@ const BaseLayout: FC<{ children: React.ReactNode; selectMenu?: string }> = ({ ch
           )}
         </Header>
         <Content style={{ minHeight: "calc(100vh - 64px)", padding: "0 50px" }}>{children}</Content>
-        <Footer style={{ textAlign: "center" }}>Ant Design ©2018 Created by Ant UED</Footer>
+        <Footer style={{ textAlign: "center" }}>Shadab &copy; 2020</Footer>
       </Layout>
     </div>
   );

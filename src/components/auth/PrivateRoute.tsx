@@ -1,13 +1,15 @@
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { isAuthenticate } from "./index";
+import { userContext } from "../../Context/Context";
 
 const PrivateRoute: FC<{ component: any; exact: boolean; path: string }> = ({ component: Component, ...rest }) => {
+  const context = useContext(userContext);
   return (
     <Route
       {...rest}
       render={(props) =>
-        isAuthenticate() ? (
+        context.user?.uid ? (
           <Component {...props} />
         ) : (
           <Redirect

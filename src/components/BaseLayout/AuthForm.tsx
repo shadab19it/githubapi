@@ -1,7 +1,9 @@
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
 import { Form, Input, Button, Checkbox, notification } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Store } from "antd/lib/form/interface";
+import { isSignOut } from "../auth";
+import { userContext } from "../../Context/Context";
 
 interface AuthForm {
   onHandleChange: (value: Store) => void;
@@ -15,9 +17,9 @@ export const onErrorMessage = (e: string) => {
     description: e,
   });
 };
-export const onSuccessMessage = () => {
+export const onSuccessMessage = (e: string) => {
   notification.success({
-    message: "Login Successful",
+    message: e,
   });
 };
 const AuthForm: FC<AuthForm> = ({ formName, onHandleChange }) => {
